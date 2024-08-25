@@ -46,7 +46,7 @@ export const CardDetails = () => {
       </div>
       <div className="flex">
         {dataCards.map(({ src, title, url }) => (
-          <Cards image={src} text={title} url={url} />
+          <Cards image={src} text={title} url={url} key={title}/>
         ))}
       </div>
     </section>

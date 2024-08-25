@@ -82,7 +82,7 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
         message: "Algo salió mal, intente más tarde",
       });
     }
-  }, [formState]);
+  }, [formState, reset]);
 
   const Input = ({
     label,
