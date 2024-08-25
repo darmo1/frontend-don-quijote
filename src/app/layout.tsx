@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Header } from "./_components/header";
+import { Footer } from "./_components/footer";
+import { ToastProvider } from "@/providers/toast-context";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} min-h-screen`}>
+        <ToastProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ToastProvider>
+      </body>
     </html>
   );
 }
