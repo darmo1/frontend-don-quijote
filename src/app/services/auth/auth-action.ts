@@ -75,6 +75,7 @@ export async function registerUserAction(
       await response.json();
 
     cookies().set("jwt", data.token, config);
+    console.log({ data })
     redirection()
     return {
       status: "success",
