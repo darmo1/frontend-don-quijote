@@ -74,9 +74,9 @@ export async function registerUserAction(
     const data: { email: string; fullName: string; token: string } =
       await response.json();
 
-    cookies().set("jwt", data.token, config);
-    console.log({ data })
-    redirection()
+    cookies().set("jwt", data.token, { secure: true });
+    console.log({ data });
+    redirection();
     return {
       status: "success",
       data: {
@@ -84,7 +84,6 @@ export async function registerUserAction(
       },
       error: null,
     };
-    
   } catch (error) {
     return {
       status: "error",
@@ -92,7 +91,7 @@ export async function registerUserAction(
         type: "string",
       },
     };
-  } 
+  }
 }
 
 export async function LoginUserAction(
@@ -125,9 +124,9 @@ export async function LoginUserAction(
 
     const data: { email: string; fullName: string; token: string } =
       await response.json();
-    console.log({ data })
-    cookies().set("jwt", data.token, config);
-    redirection()
+    console.log({ data });
+    cookies().set("jwt", data.token, { secure: true });
+    redirection();
     return {
       status: "success",
       data: {
@@ -142,5 +141,5 @@ export async function LoginUserAction(
         type: "string",
       },
     };
-  } 
+  }
 }
