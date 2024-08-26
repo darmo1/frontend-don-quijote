@@ -34,6 +34,8 @@ type RegisterUser =
     }
   | null;
 
+const redirection = () => redirect("/dashboard");
+
 export async function registerUserAction(
   prevState: any,
   formData: FormData
@@ -73,7 +75,7 @@ export async function registerUserAction(
       await response.json();
 
     cookies().set("jwt", data.token, config);
-
+    redirection()
     return {
       status: "success",
       data: {
@@ -81,6 +83,7 @@ export async function registerUserAction(
       },
       error: null,
     };
+    
   } catch (error) {
     return {
       status: "error",
@@ -88,9 +91,7 @@ export async function registerUserAction(
         type: "string",
       },
     };
-  } finally {
-    redirect("/dashboard");
-  }
+  } 
 }
 
 export async function LoginUserAction(
