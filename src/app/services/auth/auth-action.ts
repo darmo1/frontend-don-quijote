@@ -124,9 +124,9 @@ export async function LoginUserAction(
 
     const data: { email: string; fullName: string; token: string } =
       await response.json();
-
+    console.log({ data })
     cookies().set("jwt", data.token, config);
-
+    redirection()
     return {
       status: "success",
       data: {
@@ -141,7 +141,5 @@ export async function LoginUserAction(
         type: "string",
       },
     };
-  } finally {
-    redirect("/dashboard");
-  }
+  } 
 }
