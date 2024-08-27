@@ -75,7 +75,7 @@ export async function registerUserAction(
       await response.json();
 
     cookies().set("jwt", data.token, { secure: true });
-    console.log({ data });
+
     redirection();
     return {
       status: "success",
@@ -124,7 +124,7 @@ export async function LoginUserAction(
 
     const data: { email: string; fullName: string; token: string } =
       await response.json();
-    console.log({ data });
+
     cookies().set("jwt", data.token, { secure: true });
     redirection();
     return {

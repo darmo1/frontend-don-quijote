@@ -17,7 +17,7 @@ export const searchProperty = async (q: {
     });
 
     const data = await response.json();
-    console.log( { data , q }, '💥')
+  
     return {
       data,
       error: null,

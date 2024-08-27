@@ -24,7 +24,6 @@ export default async function Property({
   const { data, error }: ResponseSearchProps = await searchProperty(
     searchParams
   );
-  console.log({ searchParams, data }, "❤❤❤");
   return (
     <main>
       {error !== null && (
