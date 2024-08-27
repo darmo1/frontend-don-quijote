@@ -12,7 +12,7 @@ import { v4 as uuid } from "uuid";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-type ResponseGetAllData = {
+export type ResponseGetAllData = {
   id: string;
   type: string;
   address: string;

@@ -7,7 +7,7 @@ import { WhyUs } from "./_components/why-us";
 export default function Home() {
   return (
     <main className="">
-      <BannerHome />
+    
       <div className="max-w-7xl mx-auto">
         <CardDetails />
         <Description />

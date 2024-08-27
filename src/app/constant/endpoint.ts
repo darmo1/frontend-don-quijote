@@ -3,6 +3,7 @@ const PREFIX_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
 export const endpoint = {
   getAllProperties: `${PREFIX_BASE_URL}/properties`,
   registerProperties: `${PREFIX_BASE_URL}/properties/create`,
+  searchProperties: `${PREFIX_BASE_URL}/properties/search`,
   registerUser: `${PREFIX_BASE_URL}/auth/register`,
   loginUser: `${PREFIX_BASE_URL}/auth/login`,
   authUser: `${PREFIX_BASE_URL}/auth/user`,

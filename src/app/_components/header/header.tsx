@@ -11,6 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { v4 as uuid } from "uuid";
+import { BannerHome } from "../banners/banner-home";
 
 export const Header = () => {
   const apiWhatsapp = "https://api.whatsapp.com/send?phone=573007064360";
@@ -58,6 +59,7 @@ export const Header = () => {
     },
   ];
   return (
+    <>
     <header className="flex justify-between items-center mx-12">
       <div>
         <Image
@@ -97,5 +99,7 @@ export const Header = () => {
         <Link href={apiWhatsapp}>Contáctanos</Link>
       </Button>
     </header>
+    <BannerHome />
+    </>
   );
 };

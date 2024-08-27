@@ -1,24 +1,46 @@
-'use client'
+"use client";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
+import queryString   from 'query-string';
 
-interface IFormInput {
+export interface IFormInput {
   city: string;
   property: string;
   rooms: number;
 }
 
 export const BannerHome = () => {
-  const { register, handleSubmit } = useForm();
-  const cNameInput = `mx-8 px-4 py-2 rounded-xl w-[300px] h-[68px]`
+  const { push } = useRouter();
+  const { register, handleSubmit } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    const { city, property, rooms } = data
+    const cityformatted = city.trim().toLowerCase();
+    const propertyFormatted = property.trim().toLowerCase();
+
+    const queryParams = queryString.stringify({
+      city: cityformatted,
+      property: propertyFormatted,
+      rooms
+    })
+    
+
+    push(`/result-properties/?${queryParams}`)
+    
+  };
+
+  const cNameInput = `mx-8 px-4 py-2 rounded-xl w-[300px] h-[68px]`;
   return (
-    <section className="bg-banner-home bg-cover  h-[467px] grid place-content-center" data-testId="banner-home">
+    <section
+      className="bg-banner-home bg-cover  h-[467px] grid place-content-center"
+      data-testid="banner-home"
+    >
       <div className="flex flex-col justify-center items-center my-8">
-      <h2 className="text-6xl text-white">Compra tu propiedad con </h2>
-      <h1 className="text-6xl text-white">Grupo Don quijote</h1>
+        <h2 className="text-6xl text-white">Compra tu propiedad con </h2>
+        <h1 className="text-6xl text-white">Grupo Don quijote</h1>
       </div>
-      <form className="">
+      <form className="" onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register("city", { maxLength: 20 })}
           className={cNameInput}
@@ -35,10 +57,10 @@ export const BannerHome = () => {
           className={cNameInput}
           placeholder="Habitaciones "
         />
-       <Button asChild variant={"destructive"} >
-        <input type="submit" value="Buscar"/>
-      </Button>
-      </form> 
+        <Button asChild variant={"destructive"}>
+          <input type="submit" value="Buscar" />
+        </Button>
+      </form>
     </section>
   );
 };
