@@ -40,3 +40,10 @@ export async function middleware(request: NextRequest) {
 
   return NextResponse.next();
 }
+
+// const clientMiddleware = async (req: NextRequest ) => {
+//   const d = req.nextUrl.pathname.split('/');
+//   console.log({ d };)
+
+//   req.headers.set('')
+// } 
