@@ -61,7 +61,6 @@ export const Header = () => {
     <>
     <HeaderDesktop data={places} contact={apiWhatsapp} />
     <HeaderMobile data={places} contact={apiWhatsapp}/>
-
     <BannerHome />
     </>
   );

@@ -46,7 +46,7 @@ export const BannerHome = () => {
       >
         <input
           {...register("city", { maxLength: 20 })}
-          className={`${cNameInput} col-span-2 row-span-1 rounded-t-xl self-end md:self-start`}
+          className={`${cNameInput} col-span-2 row-span-1 rounded-t-xl self-end md:self-start text-center md:text-start`}
           placeholder={`Buscar por ciudad`}
         />
 

@@ -16,12 +16,14 @@ export const HeaderDesktop = ({ data, contact }: valuesHeaderProps) => {
   return (
     <header className="hidden md:flex justify-between items-center mx-12">
       <div>
-        <Image
-          src="/logo-donquijote.svg"
-          width="170"
-          height="64"
-          alt="Logo-don-quijote-group"
-        />
+        <Link href="/">
+          <Image
+            src="/logo-donquijote.svg"
+            width="170"
+            height="64"
+            alt="Logo-don-quijote-group"
+          />
+        </Link>
       </div>
       <div className="flex">
         <NavigationMenu className="mx-4">
