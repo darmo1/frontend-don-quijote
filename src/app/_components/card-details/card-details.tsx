@@ -15,17 +15,17 @@ export const CardDetails = () => {
       url: "",
     },
     {
-      src: "/ventas-seguro.svg",
+      src: "/ventas-seguro.jpg",
       title: "Venta de seguros",
       url: "",
     },
     {
-      src: "/agencia-viaje.svg",
+      src: "/agencia-viaje.jpg",
       title: "Agencia de viajes",
       url: "",
     },
     {
-      src: "/aseo-propiedades.svg",
+      src: "/aseo-propiedades.jpg",
       title: "Aseo de propiedades",
       url: "",
     },
@@ -44,7 +44,7 @@ export const CardDetails = () => {
           tu necesidad
         </h2>
       </div>
-      <div className="flex w-screen xl:justify-center overflow-y-auto">
+      <div className="flex w-screen justify-start xl:justify-center overflow-y-auto">
         {dataCards.map(({ src, title, url }) => (
           <Cards image={src} text={title} url={url} key={title}/>
         ))}
