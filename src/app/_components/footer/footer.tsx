@@ -99,7 +99,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="flex justify-between my-8" >
+      <div className="flex md:justify-between my-8  flex-wrap" >
         <ItemFooter title="Contácto" items={contacto} />
         <ItemFooter title="Sobre Nosotros" items={aboutUs} />
         <ItemFooter title="Propiedades" items={places} columns={3} />

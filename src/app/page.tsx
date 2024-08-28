@@ -6,7 +6,7 @@ import { WhyUs } from "./_components/why-us";
 
 export default function Home() {
   return (
-    <main className="">
+    <main className="px-4 md:px-0">
     
       <div className="max-w-7xl mx-auto">
         <CardDetails />

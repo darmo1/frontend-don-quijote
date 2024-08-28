@@ -30,35 +30,35 @@ export const BannerHome = () => {
     
   };
 
-  const cNameInput = `mx-8 px-4 py-2 rounded-xl w-[300px] h-[68px]`;
+  const cNameInput = `md:mx-8 px-4 py-2 border md:rounded-xl md:w-[300px] md:h-[68px] h-[50px]`;
   return (
     <section
       className="bg-banner-home bg-cover  h-[467px] grid place-content-center"
       data-testid="banner-home"
     >
       <div className="flex flex-col justify-center items-center my-8">
-        <h2 className="text-6xl text-white">Compra tu propiedad con </h2>
-        <h1 className="text-6xl text-white">Grupo Don quijote</h1>
+        <h2 className="text-3xl md:text-5xl text-white">Compra tu propiedad con </h2>
+        <h1 className="text-3xl md:text-5xl text-white">Grupo Don quijote</h1>
       </div>
-      <form className="" onSubmit={handleSubmit(onSubmit)}>
+      <form className="grid grid-cols-2 grid-rows-3 h-[180px] mx-6 md:flex" onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register("city", { maxLength: 20 })}
-          className={cNameInput}
+          className={`${cNameInput} col-span-2 row-span-1 rounded-t-xl self-end md:self-start`}
           placeholder="Buscar por ciudad, zona o barrio"
         />
         <input
           {...register("property", { maxLength: 20 })}
-          className={cNameInput}
+          className={`${cNameInput} col-span-1 row-span-1 rounded-bl-xl `}
           placeholder="Tipo de propiedades"
         />
         <input
           type="number"
           {...register("rooms", { min: 1 })}
-          className={cNameInput}
+          className={`${cNameInput} col-span-1 row-span-1 rounded-br-xl  `}
           placeholder="Habitaciones "
         />
-        <Button asChild variant={"destructive"}>
-          <input type="submit" value="Buscar" />
+        <Button asChild variant={"destructive"} className="col-span-2 row-span-1">
+          <input type="submit" value="Buscar" className="gap-y-4" />
         </Button>
       </form>
     </section>

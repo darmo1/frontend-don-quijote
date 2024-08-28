@@ -14,7 +14,7 @@ type ItemFooterProps = {
 
 export const ItemFooter = ({ items, title, columns }: ItemFooterProps) => {
   return (
-    <div className="mx-4">
+    <div className={`mx-4 ${title === 'Propiedades' && 'hidden md:block'}`}>
       <h3 className="font-semibold">{title}</h3>
       <ul
         className={columns ? `columns-${columns} gap-4 w-[400px]` : undefined}

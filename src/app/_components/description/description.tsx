@@ -4,7 +4,7 @@ export const Description = () => {
   return (
     <section className='grid place-content-center mx-auto max-w-7xl'>
 
-        <h1 className='text-4xl text-center'>Grupo Don Quijote</h1>
+        <h1 className='text-4xl text-center my-4'>Grupo Don Quijote</h1>
         <p className='my-7 text-2xl font-light'>
           Somos una empresa con más de 5 años de experiencia en el mercado
           inmobiliario de Medellín, comprometidos en ofrecer soluciones
