@@ -18,7 +18,6 @@ import { registerUserAction } from "@/app/services/auth/auth-action";
 import { ZodErrors } from "../../zod-error";
 import { useFormState } from "react-dom";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { registerSchema, RegisterSchema } from "@/app/services/auth/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorOption, useForm } from "react-hook-form";
@@ -30,7 +29,6 @@ const INITIAL_STATE = {
 };
 
 export function SignupForm() {
-  const { push } = useRouter();
   const {
     reset,
     clearErrors,

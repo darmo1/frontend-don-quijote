@@ -19,12 +19,10 @@ import { ErrorOption, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { SignInSchema, signInSchema } from "@/app/services/auth/validation";
 import { validationError } from "../../consts";
 
 export const SigninForm = () => {
-  const { push } = useRouter();
   const {
     reset,
     setError,
