@@ -34,7 +34,7 @@ type RegisterUser =
     }
   | null;
 
-export async function registerUserAction(prevState: any, formData: FormData) {
+export async function registerUserAction(prevState: any, formData: FormData): Promise<RegisterUser | any> {
   try {
     const body = {
       fullName: formData.get("fullName"),
