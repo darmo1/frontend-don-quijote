@@ -18,22 +18,67 @@ import { registerUserAction } from "@/app/services/auth/auth-action";
 import { ZodErrors } from "../../zod-error";
 import { useFormState } from "react-dom";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { registerSchema, RegisterSchema } from "@/app/services/auth/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ErrorOption, useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { validationError } from "../../consts";
 
 const INITIAL_STATE = {
   data: null,
 };
 
 export function SignupForm() {
+  const { push } = useRouter();
+  const {
+    reset,
+    clearErrors,
+    setError,
+    formState: { errors },
+  } = useForm<RegisterSchema>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      password: "",
+    },
+  });
   const [formState, formAction] = useFormState(
     registerUserAction,
     INITIAL_STATE
   );
+
+  useEffect(() => {
+    if (formState?.status === validationError) {
+      Object.entries(formState.error).forEach(([field, error]) =>
+        setError(
+          field as keyof RegisterSchema,
+          {
+            message: error,
+          } as ErrorOption
+        )
+      );
+    }
+
+    if (formState?.status === "success") {
+      reset();
+      window.location.href = "/";
+    }
+  }, [formState]);
+
+  const handleChange = (field: keyof RegisterSchema) => () => {
+    clearErrors(field);
+  };
+
   return (
     <div className="w-full max-w-md">
       <form action={formAction}>
         <Card>
           <CardHeader className="space-y-1">
-            <CardTitle className="text-3xl font-bold text-center">Sign Up</CardTitle>
+            <CardTitle className="text-3xl font-bold text-center">
+              Registro
+            </CardTitle>
             <CardDescription>
               Entra tu información para crear una cuenta
             </CardDescription>
@@ -46,11 +91,15 @@ export function SignupForm() {
                 name="fullName"
                 type="text"
                 placeholder="Nombre completo"
+                onChange={handleChange("fullName")}
               />
-
-              {formState?.status === "validation_error" && (
-                <ZodErrors error={formState?.data?.zodErrors?.username} />
-              )}
+              <ZodErrors
+                error={
+                  errors.fullName?.message
+                    ? [errors.fullName?.message]
+                    : undefined
+                }
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -59,10 +108,13 @@ export function SignupForm() {
                 name="email"
                 type="email"
                 placeholder="name@example.com"
+                onChange={handleChange("email")}
               />
-              {formState?.status === "validation_error" && (
-                <ZodErrors error={formState?.data?.zodErrors?.email} />
-              )}
+              <ZodErrors
+                error={
+                  errors.email?.message ? [errors.email?.message] : undefined
+                }
+              />
             </div>
 
             <div className="space-y-2">
@@ -72,14 +124,20 @@ export function SignupForm() {
                 name="password"
                 type="password"
                 placeholder="Contraseña"
+                onChange={handleChange("password")}
               />
-              {formState?.status === "validation_error" && (
-                <ZodErrors error={formState?.data?.zodErrors?.password} />
-              )}
+              <ZodErrors
+                error={
+                  errors.password?.message
+                    ? [errors.password?.message]
+                    : undefined
+                }
+              />
             </div>
           </CardContent>
+
           {formState.status == "error" && (
-            <ZodErrors error={formState.data.message} />
+            <ZodErrors error={formState.error.message} />
           )}
           <CardFooter className="flex flex-col">
             <Button variant={"destructive"}>Registrarse</Button>

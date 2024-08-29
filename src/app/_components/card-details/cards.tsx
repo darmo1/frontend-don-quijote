@@ -13,7 +13,7 @@ export const Cards = ({
 }) => {
   return (
     <div className="min-w-[326px] min-h-[394px] rounded-xl relative mx-4 ">
-      <Image src={image} width={326} height={394} alt={image} className="rounded-xl" />
+      <Image src={image} fill={true} alt={image} className="rounded-xl" />
       <Link href={url}>
         <h2 className="w-[250px] absolute bottom-10 left-10  text-white text-3xl font-semibold">{text}</h2>
       </Link>

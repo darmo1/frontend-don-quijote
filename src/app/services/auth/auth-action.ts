@@ -1,53 +1,24 @@
 "use server";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { endpoint } from "@/app/constant/endpoint";
-import { z } from "zod";
-import { signInSchema } from "@/app/(auth)/signin/signin-form/validation";
 
-const schemaRegister = z.object({
-  fullName: z.string().min(3).max(20, {
-    message: "fullName must be between 3 and 20 characters",
-  }),
-  password: z.string().min(6).max(100, {
-    message: "Password must be between 6 and 100 characters",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address",
-  }),
-});
+import { registerSchema, signInSchema } from "./validation";
+import { ResponseAuthUser, ResponseAuthUserAction } from "./types";
+import { validationError } from "@/app/(auth)/consts";
 
-type RegisterUser =
-  | {
-      status: "success";
-      data: { ok: boolean };
-      error: null;
-    }
-  | {
-      status: "error";
-      data: any;
-    }
-  | {
-      status: "validation_error";
-      data: { zodErrors: Record<string, string[]> };
-      message: string;
-    }
-  | null;
-
-export async function registerUserAction(prevState: any, formData: FormData): Promise<RegisterUser | any> {
+export async function registerUserAction(
+  prevState: any,
+  formData: FormData
+): Promise<ResponseAuthUserAction | any> {
   try {
-    const body = {
-      fullName: formData.get("fullName"),
-      password: formData.get("password"),
-      email: formData.get("email"),
-    };
-    const validatedFields = schemaRegister.safeParse(body);
+    const body = Object.fromEntries(formData);
+    const validatedFields = registerSchema.safeParse(body);
 
     if (!validatedFields.success) {
       return {
-        status: "validation_error",
-        data: { zodErrors: validatedFields.error.flatten().fieldErrors },
-        message: "Missing Fields. Failed to Register.",
+        status: validationError,
+        data: null,
+        error: validatedFields.error.flatten().fieldErrors,
       };
     }
 
@@ -59,9 +30,10 @@ export async function registerUserAction(prevState: any, formData: FormData): Pr
       body: JSON.stringify(body),
     });
 
-    const data: { email: string; fullName: string; token: string } =
-      await response.json();
-
+    if (!response.ok) {
+      throw new Error("error - api - ");
+    }
+    const data: ResponseAuthUser = await response.json();
     cookies().set("jwt", data.token, { secure: true });
 
     return {
@@ -81,18 +53,20 @@ export async function registerUserAction(prevState: any, formData: FormData): Pr
   }
 }
 
-export async function LoginUserAction(_: any, formData: FormData) {
+export async function LoginUserAction(
+  _: any,
+  formData: FormData
+): Promise<ResponseAuthUserAction | any> {
   try {
     const body = {
       email: formData.get("email"),
       password: formData.get("password"),
     };
-
     const validatedFields = signInSchema.safeParse(body);
 
     if (!validatedFields.success) {
       return {
-        status: "validation-error",
+        status: validationError,
         data: null,
         error: validatedFields.error.flatten().fieldErrors,
       };
@@ -106,9 +80,11 @@ export async function LoginUserAction(_: any, formData: FormData) {
       body: JSON.stringify(body),
     });
 
-    const data: { email: string; fullName: string; token: string } =
-      await response.json();
+    if (!response.ok) {
+      throw new Error("error - api - ");
+    }
 
+    const data: ResponseAuthUser = await response.json();
     cookies().set("jwt", data.token, { secure: true });
 
     return {
@@ -119,6 +95,8 @@ export async function LoginUserAction(_: any, formData: FormData) {
       error: null,
     };
   } catch (error) {
+    console.log({ error }, "💥");
+
     return {
       status: "error",
       data: {

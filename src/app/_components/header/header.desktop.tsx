@@ -11,8 +11,13 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { valuesHeaderProps } from "./header";
+import { DropdownMenu } from "../dropdown-menu";
 
-export const HeaderDesktop = ({ data, contact }: valuesHeaderProps) => {
+export const HeaderDesktop = ({
+  data,
+  contact,
+  isUserLogged = false,
+}: valuesHeaderProps) => {
   return (
     <header className="hidden md:flex justify-between items-center mx-12">
       <div>
@@ -51,9 +56,13 @@ export const HeaderDesktop = ({ data, contact }: valuesHeaderProps) => {
         </NavigationMenu>
       </div>
 
-      <Button asChild variant={"destructive"}>
-        <Link href={contact}>Contáctanos</Link>
-      </Button>
+      {isUserLogged ? (
+        <DropdownMenu />
+      ) : (
+        <Button asChild variant={"destructive"}>
+          <Link href={contact}>Contáctanos</Link>
+        </Button>
+      )}
     </header>
   );
 };

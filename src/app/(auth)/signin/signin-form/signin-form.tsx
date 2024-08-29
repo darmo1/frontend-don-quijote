@@ -15,15 +15,22 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useFormState } from "react-dom";
 import { ZodErrors } from "../../zod-error";
-import { useForm } from "react-hook-form";
-import { signInSchema, SignInSchema } from "./validation";
+import { ErrorOption, useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { SignInSchema, signInSchema } from "@/app/services/auth/validation";
+import { validationError } from "../../consts";
 
 export const SigninForm = () => {
   const { push } = useRouter();
-  const { reset } = useForm<SignInSchema>({
+  const {
+    reset,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm<SignInSchema>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
@@ -33,13 +40,28 @@ export const SigninForm = () => {
   const [formState, formLoginAction] = useFormState(LoginUserAction, null);
 
   useEffect(() => {
+    if (formState?.status === validationError) {
+      Object.entries(formState.error).forEach(([field, error]) =>
+        setError(
+          field as keyof SignInSchema,
+          {
+            message: error,
+          } as ErrorOption
+        )
+      );
+    }
+
     if (formState?.status === "success") {
       reset();
-      push("/dashboard");
+      window.location.href= '/'
     }
 
     if (formState?.status === "error") return reset();
   }, [formState]);
+
+  const handleChange = (field: keyof SignInSchema) => () => {
+    clearErrors(field);
+  };
 
   return (
     <div className="w-full max-w-xl">
@@ -57,10 +79,18 @@ export const SigninForm = () => {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" type="text" placeholder="email" />
-              {formState?.status === "validation-error" && (
-                <ZodErrors error={formState?.error?.email} />
-              )}
+              <Input
+                id="email"
+                name="email"
+                type="text"
+                placeholder="email"
+                onChange={handleChange("email")}
+              />
+              <ZodErrors
+                error={
+                  errors.email?.message ? [errors.email?.message] : undefined
+                }
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Contraseña</Label>
@@ -69,10 +99,15 @@ export const SigninForm = () => {
                 name="password"
                 type="password"
                 placeholder="Contraseña"
+                onChange={handleChange("password")}
               />
-              {formState?.status === "validation-error" && (
-                <ZodErrors error={formState?.error?.password} />
-              )}
+              <ZodErrors
+                error={
+                  errors.password?.message
+                    ? [errors.password?.message]
+                    : undefined
+                }
+              />
             </div>
             {formState?.status === "error" && (
               <p className="text-red-500">No coincide el usuario</p>

@@ -42,7 +42,7 @@ export const CardDetails = () => {
           tu necesidad
         </h2>
       </div>
-      <div className="flex w-screen justify-start xl:justify-center overflow-y-auto">
+      <div className="flex w-full  justify-start  overflow-x-auto ">
         {dataCards.map(({ src, title, url }) => (
           <Cards image={src} text={title} url={url} key={title} />
         ))}

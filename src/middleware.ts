@@ -5,7 +5,7 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   //1. Check if routes is protected
-  const protectedRoutes = ["/dashboard"];
+  const protectedRoutes = ["/"];
   const currentPath = request.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(currentPath);
 
@@ -14,8 +14,12 @@ export async function middleware(request: NextRequest) {
     const token = cookies().get("jwt")?.value;
     if (!token) {
       // Si no hay token, redirige a la página de login
-
-      return NextResponse.redirect(new URL("/signin", request.url));
+      //return NextResponse.redirect(new URL("/signin", request.url));
+      const nextResponse = NextResponse.next();
+      nextResponse.headers.set("x-user-loggin", JSON.stringify({
+        isUserLogged: false
+      }));
+      return nextResponse;
     }
 
     //Redirect unauthed user
@@ -35,6 +39,9 @@ export async function middleware(request: NextRequest) {
     // Añadir datos de usuario a los headers
     const nextResponse = NextResponse.next();
     nextResponse.headers.set("x-user-data", JSON.stringify(userData));
+    nextResponse.headers.set("x-user-loggin", JSON.stringify({
+      isUserLogged: true
+    }));
     return nextResponse;
   }
 

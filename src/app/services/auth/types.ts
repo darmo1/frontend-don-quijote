@@ -1,4 +1,4 @@
-export type LoginUserUser =
+export type ResponseAuthUserAction =
   | {
       status: "success";
       data: any;
@@ -14,3 +14,9 @@ export type LoginUserUser =
       error:  Record<string, string[]> ;
     }
   | null;
+
+  export type ResponseAuthUser = {
+    email: string;
+    fullName: string;
+    token:string
+  }

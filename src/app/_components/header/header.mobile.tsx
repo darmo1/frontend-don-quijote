@@ -13,9 +13,9 @@ import { valuesHeaderProps } from "./header";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
-export const HeaderMobile = ({ data, contact }: valuesHeaderProps) => {
+export const HeaderMobile = ({ data, contact, isUserLogged}: valuesHeaderProps) => {
   return (
-    <header className="flex justify-between md:hidden py-2">
+    <header className="flex justify-between md:hidden py-2 sticky top-0 z-10 bg-white">
       <div>
         <Link href="/">
           <Image
@@ -28,9 +28,9 @@ export const HeaderMobile = ({ data, contact }: valuesHeaderProps) => {
       </div>
       <Sheet>
         <SheetTrigger className="relative">
-          <Bars3Icon className="size-12 grid mr-3" />
+          <Bars3Icon className="size-12 grid " />
         </SheetTrigger>
-        <SheetContent side={"top"} className="h-1/2">
+        <SheetContent side={"top"} className="min-h-1/2">
           <div>
             <Link href="/">
               <Image
