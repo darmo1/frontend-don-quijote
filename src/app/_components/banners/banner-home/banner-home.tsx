@@ -1,10 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import queryString from "query-string";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+// import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 export interface IFormInput {
   city: string;
   property: string;
@@ -12,6 +12,7 @@ export interface IFormInput {
 }
 
 export const BannerHome = () => {
+  const pathName = usePathname()
   const { push } = useRouter();
   const { register, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
@@ -27,6 +28,8 @@ export const BannerHome = () => {
 
     push(`/result-properties/?${queryParams}`);
   };
+
+  if(['/signin', '/signup'].includes(pathName)) return null
 
   const cNameInput = `md:mx-8 px-4 py-1 border md:rounded-xl md:w-[300px]  h-[50px]`;
   return (

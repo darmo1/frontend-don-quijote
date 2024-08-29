@@ -33,9 +33,9 @@ export function SignupForm() {
       <form action={formAction}>
         <Card>
           <CardHeader className="space-y-1">
-            <CardTitle className="text-3xl font-bold">Sign Up</CardTitle>
+            <CardTitle className="text-3xl font-bold text-center">Sign Up</CardTitle>
             <CardDescription>
-              Enter your details to create a new account
+              Entra tu información para crear una cuenta
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">

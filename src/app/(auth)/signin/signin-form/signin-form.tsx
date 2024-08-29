@@ -15,16 +15,31 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useFormState } from "react-dom";
 import { ZodErrors } from "../../zod-error";
-
-const INITIAL_STATE = {
-  data: null,
-};
+import { useForm } from "react-hook-form";
+import { signInSchema, SignInSchema } from "./validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export const SigninForm = () => {
-  const [formState, formLoginAction] = useFormState(
-    LoginUserAction,
-    INITIAL_STATE
-  );
+  const { push } = useRouter();
+  const { reset } = useForm<SignInSchema>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const [formState, formLoginAction] = useFormState(LoginUserAction, null);
+
+  useEffect(() => {
+    if (formState?.status === "success") {
+      reset();
+      push("/dashboard");
+    }
+
+    if (formState?.status === "error") return reset();
+  }, [formState]);
 
   return (
     <div className="w-full max-w-xl">
@@ -43,8 +58,8 @@ export const SigninForm = () => {
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" name="email" type="text" placeholder="email" />
-              {formState?.status === "validation_error" && (
-                <ZodErrors error={formState?.data?.zodErrors?.email} />
+              {formState?.status === "validation-error" && (
+                <ZodErrors error={formState?.error?.email} />
               )}
             </div>
             <div className="space-y-2">
@@ -55,10 +70,13 @@ export const SigninForm = () => {
                 type="password"
                 placeholder="Contraseña"
               />
-              {formState?.status === "validation_error" && (
-                <ZodErrors error={formState?.data?.zodErrors?.password} />
+              {formState?.status === "validation-error" && (
+                <ZodErrors error={formState?.error?.password} />
               )}
             </div>
+            {formState?.status === "error" && (
+              <p className="text-red-500">No coincide el usuario</p>
+            )}
           </CardContent>
           <CardFooter className="flex flex-col">
             <Button variant={"destructive"}>Ingresar</Button>

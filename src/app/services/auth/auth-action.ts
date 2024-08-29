@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { endpoint } from "@/app/constant/endpoint";
 import { z } from "zod";
-import { config } from "./cookies-config";
+import { signInSchema } from "@/app/(auth)/signin/signin-form/validation";
 
 const schemaRegister = z.object({
   fullName: z.string().min(3).max(20, {
@@ -34,12 +34,7 @@ type RegisterUser =
     }
   | null;
 
-const redirection = () => redirect("/dashboard");
-
-export async function registerUserAction(
-  prevState: any,
-  formData: FormData
-): Promise<RegisterUser | any> {
+export async function registerUserAction(prevState: any, formData: FormData) {
   try {
     const body = {
       fullName: formData.get("fullName"),
@@ -64,19 +59,11 @@ export async function registerUserAction(
       body: JSON.stringify(body),
     });
 
-    // if( response?.statusCode != 400  ){
-    //   return {
-    //     status: "error",
-    //     data
-    //   }
-    // }
-
     const data: { email: string; fullName: string; token: string } =
       await response.json();
 
     cookies().set("jwt", data.token, { secure: true });
 
-    redirection();
     return {
       status: "success",
       data: {
@@ -94,25 +81,22 @@ export async function registerUserAction(
   }
 }
 
-export async function LoginUserAction(
-  prevState: any,
-  formData: FormData
-): Promise<RegisterUser | any> {
+export async function LoginUserAction(_: any, formData: FormData) {
   try {
     const body = {
       email: formData.get("email"),
       password: formData.get("password"),
     };
 
-    const validatedFields = schemaRegister.safeParse(body);
+    const validatedFields = signInSchema.safeParse(body);
 
-    // if (!validatedFields.success) {
-    //   return {
-    //     status: "validation_error",
-    //     data: { zodErrors: validatedFields.error.flatten().fieldErrors },
-    //     message: "Missing Fields. Failed to Register.",
-    //   };
-    // }
+    if (!validatedFields.success) {
+      return {
+        status: "validation-error",
+        data: null,
+        error: validatedFields.error.flatten().fieldErrors,
+      };
+    }
 
     const response = await fetch(endpoint.loginUser, {
       method: "POST",
@@ -126,7 +110,7 @@ export async function LoginUserAction(
       await response.json();
 
     cookies().set("jwt", data.token, { secure: true });
-    redirection();
+
     return {
       status: "success",
       data: {
