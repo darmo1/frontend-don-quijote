@@ -1,4 +1,3 @@
-import React from "react";
 import { Cards } from "./cards";
 
 type dataCardsProsp = {
@@ -12,22 +11,22 @@ export const CardDetails = () => {
     {
       src: "/derecho-penal.svg",
       title: "Derecho penal y de tránsito",
-      url: "",
+      url: "/derecho",
     },
     {
       src: "/ventas-seguro.jpg",
       title: "Venta de seguros",
-      url: "",
+      url: "/seguros",
     },
     {
       src: "/agencia-viaje.jpg",
       title: "Agencia de viajes",
-      url: "",
+      url: "/viajes",
     },
     {
       src: "/aseo-propiedades.jpg",
       title: "Aseo de propiedades",
-      url: "",
+      url: "/aseo",
     },
   ];
 
