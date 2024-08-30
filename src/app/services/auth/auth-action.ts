@@ -11,7 +11,11 @@ export async function registerUserAction(
   formData: FormData
 ): Promise<ResponseAuthUserAction | any> {
   try {
-    const body = Object.fromEntries(formData);
+    const body = {
+      fullName: formData.get("fullName"),
+      password: formData.get("password"),
+      email: formData.get("email"),
+    };
     const validatedFields = registerSchema.safeParse(body);
 
     if (!validatedFields.success) {
@@ -29,7 +33,7 @@ export async function registerUserAction(
       },
       body: JSON.stringify(body),
     });
-
+    console.log({ response })
     if (!response.ok) {
       throw new Error("error - api - ");
     }
@@ -79,7 +83,7 @@ export async function LoginUserAction(
       },
       body: JSON.stringify(body),
     });
-
+    console.log({ response })
     if (!response.ok) {
       throw new Error("error - api - ");
     }
