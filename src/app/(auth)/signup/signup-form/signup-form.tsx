@@ -49,7 +49,7 @@ export function SignupForm() {
 
   useEffect(() => {
     if (formState?.status === validationError) {
-      Object.entries(formState.error).forEach(([field, error]) =>
+      Object.entries(formState?.error).forEach(([field, error]) =>
         setError(
           field as keyof RegisterSchema,
           {
@@ -134,8 +134,8 @@ export function SignupForm() {
             </div>
           </CardContent>
 
-          {formState.status == "error" && (
-            <ZodErrors error={formState.error.message} />
+          {formState?.status == "error" && (
+            <ZodErrors error={formState?.error?.message} />
           )}
           <CardFooter className="flex flex-col">
             <Button variant={"destructive"}>Registrarse</Button>

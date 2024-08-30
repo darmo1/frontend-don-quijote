@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
+  try{
   //1. Check if routes is protected
   const protectedRoutes = ["/"];
   const currentPath = request.nextUrl.pathname;
@@ -46,7 +47,11 @@ export async function middleware(request: NextRequest) {
   }
 
   return NextResponse.next();
+  }catch(error){
+    console.log({ error })
+  }
 }
+
 
 // const clientMiddleware = async (req: NextRequest ) => {
 //   const d = req.nextUrl.pathname.split('/');
