@@ -1,0 +1,1 @@
+export { SliderHeader } from './slider-header'

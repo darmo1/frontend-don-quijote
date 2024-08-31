@@ -154,7 +154,6 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
   };
 
   return (
-    
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="border w-full mx-auto px-4 py-2 bg-gray-300 rounded-xl"
@@ -249,7 +248,7 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
         ))}
       </div>
 
-      {(fields.length > 0  && fields.length <= 10 ) && (
+      {fields.length > 0 && fields.length <= 10 && (
         <div className="flex justify-center">
           <Button variant="destructive" onClick={onAddImage} className="my-4">
             Add documents

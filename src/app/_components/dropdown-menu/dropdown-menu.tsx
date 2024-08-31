@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { deleteCookies } from "./utils";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function DropdownMenu() {
   const { refresh  } = useRouter();
@@ -31,10 +32,12 @@ export function DropdownMenu() {
         <DropdownMenuLabel>Caracteristicas</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+          <Link href="/dashboard">
           <DropdownMenuItem>
             Agregar Nueva Propiedad
             <DropdownMenuShortcut>+</DropdownMenuShortcut>
           </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
 

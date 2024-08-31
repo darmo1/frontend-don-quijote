@@ -8,13 +8,13 @@ export default function Home() {
   return (
     <main className="px-4 md:px-0">
     
-      <BannerHome />
+   <BannerHome />
       <div className="max-w-6xl mx-auto">
         <CardDetails />
         <Description />
         <WhyUs />
         <SimpleSlider />
-      </div>
+      </div> 
     </main>
   );
 }
