@@ -55,9 +55,11 @@ export const HeaderDesktop = ({
         <NavigationMenuContent className="px-4 py-6 relative">
           <ul className="columns-3 gap-8 w-[600px] ">
             {data.map(({ city, id }) => (
-              <NavigationMenuLink key={id}>
-                <li className="break-words my-2">{city}</li>
-              </NavigationMenuLink>
+              <Link key={id} href={`/result-properties/?city=${city.toLocaleLowerCase()}`}>
+                <NavigationMenuLink>
+                  <li className="break-words my-2">{city}</li>
+                </NavigationMenuLink>
+              </Link>
             ))}
           </ul>
         </NavigationMenuContent>

@@ -5,6 +5,7 @@ import { Header } from "./_components/header";
 import { Footer } from "./_components/footer";
 import { ToastProvider } from "@/providers/toast-context";
 import "react-toastify/dist/ReactToastify.css";
+import { QueryProvider } from "@/providers/query-provider.context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} min-h-screen`}>
-        <ToastProvider>
-          <Header />
-          {children}
-          <Footer />
-        </ToastProvider>
+        <QueryProvider>
+          <ToastProvider>
+            <Header />
+            {children}
+            <Footer />
+          </ToastProvider>
+        </QueryProvider>
       </body>
     </html>
   );
