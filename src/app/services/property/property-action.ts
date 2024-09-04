@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { endpoint } from "@/app/constant/endpoint";
 import { z } from "zod";
 import { FormInputProps } from "@/app/dashboard/form-property/types";
-import { Console } from "console";
 
 const message = "Field should be greater";
 const messageString = "There is somethin wrong";
@@ -70,7 +69,7 @@ export async function propertyAction(
       headers: {
         authorization: `Bearer ${token}`,
       },
-      body:  formValues ,
+      body: formValues,
     });
 
     const data = await response.json();
@@ -83,7 +82,7 @@ export async function propertyAction(
       error: null,
     };
   } catch (error) {
-    console.log( { error })
+    console.log({ error });
     return {
       status: "error",
       data: {

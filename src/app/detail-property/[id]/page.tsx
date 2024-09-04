@@ -2,9 +2,10 @@ import { CardWhatsapp } from "@/app/_components/card-whatsapp";
 import { findPropertyId, PropertyProps } from "@/app/result-properties/utils";
 import { SliderProperties } from "./_components/SliderProperties";
 import { SuggestionsProperty } from "./_components/suggestionsProperty";
+import { SuggestionPropertyServer } from "./_components/suggestionsProperty/suggestion-property.server";
 
 type SearchParamsProps = {
-  city?: string;
+  city: string;
   property?: string;
   rooms?: number;
 };
@@ -18,11 +19,12 @@ export default async function Page({
 }) {
   const { id } = params;
   const { city } = searchParams;
+
   const {
-    data: { property = [], suggestedProperties = [] },
+    data: { property = [] },
     error,
   }: PropertyProps = await findPropertyId({ id, city });
-console.log({ property, suggestedProperties })
+
   const {
     address,
     available,
@@ -65,14 +67,14 @@ console.log({ property, suggestedProperties })
   };
 
   return (
-    <main className="max-w-6xl mx-auto">
+    <main className="max-w-6xl mx-auto px-12">
       <SliderProperties images={images} />
-      <div className="text-center font-semibold h-16 w-full bg-[#49A02F] rounded-xl flex justify-center items-center text-white">
+      <div className="text-center font-semibold h-12 w-full bg-[#49A02F] rounded flex justify-center items-center text-white my-14">
         Vida de lujo en un exclusivo sector
       </div>
       <div className="my-8">
-        <h1 className="font-semibold text-center text-xl">Caracteristicas</h1>
-        <div className="flex flex-wrap max-w-2xl mx-auto border">
+        <h1 className="font-semibold  text-xl mb-12">Caracteristicas</h1>
+        <div className="flex flex-wrap max-w-2xl mx-auto ">
           <Field title="Precio" value={price} />
           <Field title="Área" value={area} />
           <Field title="Tipo de propiedad" value={type} />
@@ -87,20 +89,15 @@ console.log({ property, suggestedProperties })
         </div>
       </div>
 
-      <h1 className="font-semibold text-center text-2xl">Ubicacion</h1>
+
 
        <div>
         <CardWhatsapp />
       </div> 
 
-      {suggestedProperties.length > 0 && (
-        <div>
-          <h1 className="font-semibold text-center text-xl">
-            Otras propiedades que te puedan interesar:
-          </h1>
-          <SuggestionsProperty suggestions={suggestedProperties} />
-        </div>
-      )}
+      <SuggestionPropertyServer city={city}/>
+
+      
     </main>
   );
 }

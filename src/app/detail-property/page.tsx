@@ -14,7 +14,7 @@ export default async function SearchResults(
     searchParams: SearchParamsProps;
   }
 ) {
-  if (Object.keys(searchParams).length === 0) {
+  if (!searchParams || Object.keys(searchParams).length === 0) {
     return redirect("/");
   }
   return (

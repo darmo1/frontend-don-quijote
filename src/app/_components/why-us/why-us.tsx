@@ -23,7 +23,7 @@ export const WhyUs = () => {
   ];
   return (
     <div className="md:grid">
-      <h1 className="text-3xl font-semibold my-12 text-center">¿Por qué elegirnos?</h1>
+      <h1 className="text-3xl md:text-5xl font-semibold my-12 text-center">¿Por qué elegirnos?</h1>
       <div className="flex flex-wrap justify-around">
         {data.map(({ src, title, description }) => (
           <Card key={title} src={src} title={title} description={description} />

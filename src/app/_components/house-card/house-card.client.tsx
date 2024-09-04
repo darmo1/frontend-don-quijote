@@ -10,7 +10,7 @@ export const HouseCardClient = ({
   data: ResponseGetAllData[];
 }) => {
   return (
-    <div className="flex items-center w-full">
+    <div className="flex items-center w-full mb-12">
       {data?.length === 0 ? (
         <div className="text-center font-semibold">
           No se encontraron resultados, intento con otra busqueda 💥

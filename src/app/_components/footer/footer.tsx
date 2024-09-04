@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ItemFooter, ItemProp } from "./item-footer";
 import { v4 as uuid } from "uuid";
+import Link from "next/link";
 
 export const Footer = () => {
   const contacto: ItemProp[] = [
@@ -99,14 +100,36 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="flex md:justify-between my-8  flex-wrap" >
+      <div className="flex md:justify-between my-8  flex-wrap">
         <ItemFooter title="Contácto" items={contacto} />
         <ItemFooter title="Sobre Nosotros" items={aboutUs} />
         <ItemFooter title="Propiedades" items={places} columns={3} />
         <ItemFooter title="Servicios" items={servicios} />
       </div>
-      <div className="bg-custom-orange h-16 text-center"> Redes sociales</div>
+      <div className="bg-custom-orange h-16 block  md:flex md:justify-end  md:items-center">
+        <Link href="">
+          <div className="flex mx-4">
+            <Image
+              src="/logotipo-de-instagram.png"
+              width={20}
+              height={12}
+              alt="intagram"
+            />
+            <p className="text-light mx-3">Inmobiliariadonquijote</p>
+          </div>
+        </Link>
+        <Link href="">
+          <div className="flex mx-4"> 
+            <Image
+              src="/facebook.png"
+              width={22}
+              height={12}
+              alt="intagram"
+            />
+            <p className="text-light mx-3">Inmobiliariadonquijote</p>
+          </div>
+        </Link>
+      </div>
     </footer>
   );
 };
- 

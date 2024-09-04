@@ -2,19 +2,9 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { settingsSlider } from "@/app/detail-property/[id]/_components/SliderProperties/utils";
 
 export function SimpleSlider() {
-  var settings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 500,
-    autoplaySpeed: 5000,
-    cssEase: "linear"
-  };
-
   const dataSlider = [
     {
       title: "Inmobiliaria don quijote",
@@ -34,7 +24,7 @@ export function SimpleSlider() {
   ];
   return (
     <div className="slider-container pb-20 ">
-      <Slider {...settings}>
+      <Slider {...settingsSlider}>
         {dataSlider.map(({ description, title }, index) => (
           <div
             key={index}

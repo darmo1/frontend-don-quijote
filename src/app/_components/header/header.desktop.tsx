@@ -49,13 +49,20 @@ export const HeaderDesktop = ({
   }: {
     data: { id: string; city: string }[];
   }) => {
+    if (!data.length) return;
+
+    const properties = data.sort((a, b) => a.city.localeCompare(b.city));
     return (
       <>
         <NavigationMenuTrigger> Ver propiedades </NavigationMenuTrigger>
         <NavigationMenuContent className="px-4 py-6 relative">
           <ul className="columns-3 gap-8 w-[600px] ">
-            {data.map(({ city, id }) => (
-              <Link key={id} href={`/result-properties/?city=${city.toLocaleLowerCase()}`}>
+            {properties.map(({ city, id }) => (
+              <Link
+                key={id}
+                href={`/result-properties/?city=${city.toLocaleLowerCase()}`}
+                className="hover:underline"
+              >
                 <NavigationMenuLink>
                   <li className="break-words my-2">{city}</li>
                 </NavigationMenuLink>
@@ -68,7 +75,7 @@ export const HeaderDesktop = ({
   };
 
   return (
-    <header className="hidden md:flex justify-between items-center mx-12">
+    <header className="hidden md:flex justify-between items-center mx-12 py-3">
       <div>
         <Link href="/">
           <Image

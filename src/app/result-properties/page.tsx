@@ -12,13 +12,13 @@ export default async function SearchResults({
 }: {
   searchParams: SearchParamsProps;
 }) {
-  if (Object.keys(searchParams).length === 0) {
+  if (!searchParams || Object.keys(searchParams).length === 0) {
     return redirect("/");
   }
   return (
-    <main className="max-w-6xl  mx-auto">
+    <main className="max-w-6xl px-8 mx-auto">
       <div>
-        <h1 className="font-semibold text-lg">
+        <h1 className="font-semibold text-2xl md:text-3xl mx-6">
           Apartamentos{` ${searchParams?.city && `en ${searchParams.city}`}`}
         </h1>
       </div>

@@ -14,7 +14,7 @@ export const ServiceCard = ({
   index 
 }: ServiceCardProps) => {
   return (
-    <div id={index} className="rounded-md min-w-[250px] h-[160px] flex bg-white border  px-4 py-2">
+    <div id={index} className="rounded-md min-w-[250px] h-[160px] flex bg-white border  px-4 py-2 hover:bg-gray-100">
       <div className="w-1/3 flex justify-center items-center">
         <Image src={src} width={86} height={87} alt={title} className="px-2"/>
       </div>

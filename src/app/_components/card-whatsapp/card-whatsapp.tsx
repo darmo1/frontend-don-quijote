@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import { CardWhatsappForm } from "./card-whatsapp-form";
 import CardWhatsappSkeleton from "./card-whatsapp.skeleton";
+import { endpointApiNext } from "@/app/constant/endpoint";
 
 export const CardWhatsapp = async () => {
-  const response = await fetch("http://localhost:3001/api/calling-code");
+  const response = await fetch(endpointApiNext.getCallingCode);
   if (!response.ok) {
     throw new Error("Failed to fetch calling code");
   }

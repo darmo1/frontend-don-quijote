@@ -35,9 +35,9 @@ export const BannerHome = () => {
     <section className="bg-banner-home bg-cover  h-[467px] grid place-content-center">
       <div className="flex flex-col justify-center items-center my-8">
         <h2 className="text-3xl md:text-5xl text-white">
-          Compra tu propiedad con{" "}
+          Compra tu propiedad con
         </h2>
-        <h1 className="text-3xl md:text-5xl text-white">Grupo Don quijote</h1>
+        <h1 className="text-3xl md:text-5xl text-white md:my-2">Grupo Don quijote</h1>
       </div>
 
       <form

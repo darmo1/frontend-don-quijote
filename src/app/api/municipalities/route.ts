@@ -8,9 +8,11 @@ export async function GET() {
       cache: 'reload'
     });
     const data = await res.json();
-   
+    
     return new Response(JSON.stringify(data))
   }catch(error){
-    return NextResponse.json( error, { status: 500})
+    
+    const data:[] = []
+    return NextResponse.json( JSON.stringify(data), { status: 500})
   }
 }

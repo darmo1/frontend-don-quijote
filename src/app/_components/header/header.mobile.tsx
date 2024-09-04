@@ -1,6 +1,5 @@
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -12,8 +11,19 @@ import Image from "next/image";
 import { valuesHeaderProps } from "./header";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { v4 } from "uuid";
 
-export const HeaderMobile = ({ data, contact, isUserLogged}: valuesHeaderProps) => {
+export const HeaderMobile = ({
+  data,
+  contact,
+  isUserLogged,
+}: valuesHeaderProps) => {
+  const secondMenu = [
+    {
+      item: "item",
+      href: "/",
+    },
+  ];
   return (
     <header className="flex justify-between md:hidden py-2 sticky top-0 z-10 bg-white">
       <div>
@@ -42,18 +52,37 @@ export const HeaderMobile = ({ data, contact, isUserLogged}: valuesHeaderProps) 
             </Link>
           </div>
 
-          <SheetHeader>
-            <SheetTitle className="my-4 text-start">Propiedades en:</SheetTitle>
-            <SheetDescription>
-              <ul className="columns-1">
-                {data.map(({ city, id }) => (
-                  <li key={id}>
-                    <li className="break-words my-2 text-start">{city}</li>
-                  </li>
-                ))}
-              </ul>
-            </SheetDescription>
-          </SheetHeader>
+          {data.length === 0 ? (
+            <SheetHeader>
+              <SheetTitle className="my-4 text-start">
+                Propiedades en:
+              </SheetTitle>
+              <SheetDescription>
+                <ul className="columns-1">
+                  {data.map(({ city, id }) => (
+                    <li key={id}>
+                      <li className="break-words my-2 text-start">{city}</li>
+                    </li>
+                  ))}
+                </ul>
+              </SheetDescription>
+            </SheetHeader>
+          ) : (
+            <SheetHeader>
+              <SheetTitle className="my-4 text-start">
+                Acerca de nosotros
+              </SheetTitle>
+              <SheetDescription>
+                <ul className="columns-1">
+                  {secondMenu.map(({ item, href }) => (
+                    <Link href={href} key={v4()}>
+                      <li className="break-words my-2 text-start">{item}</li>
+                    </Link>
+                  ))}
+                </ul>
+              </SheetDescription>
+            </SheetHeader>
+          )}
         </SheetContent>
       </Sheet>
     </header>
