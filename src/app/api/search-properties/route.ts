@@ -1,4 +1,5 @@
 import { endpoint } from "@/app/constant/endpoint";
+import { NextResponse } from "next/server";
 
 
 export async function GET() {
@@ -10,6 +11,6 @@ export async function GET() {
    
     return new Response(JSON.stringify(data))
   }catch(error){
-    // console.log(error)
+    return NextResponse.json( error, { status: 500})
   }
 }
