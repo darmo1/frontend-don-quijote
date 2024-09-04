@@ -20,7 +20,20 @@ export type ResponseGetAllData = {
   images: string[];
   available: boolean;
   description: string;
-};
+  departments: string,
+  municipality: string,
+  location: string,
+  area: number;
+  reference: string,
+  socialClass: number;
+  rooms: number;
+  closet: number;
+  administration: string,
+  garage: number;
+  kitchen: number;
+  bathroom: number;
+  dinningroom: number;
+}
 
 export default async function AllProperties() {
   const response = await fetch(endpoint.getAllProperties);

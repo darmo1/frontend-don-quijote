@@ -1,0 +1,1 @@
+export { CardProperty } from './card-property'

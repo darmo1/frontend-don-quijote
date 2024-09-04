@@ -7,18 +7,16 @@ type SearchParamsProps = {
   property?: string;
   rooms?: number;
 };
-export default async function SearchResults(
-  {
-    searchParams,
-  }: {
-    searchParams: SearchParamsProps;
-  } = { searchParams: {} }
-) {
+export default async function SearchResults({
+  searchParams = {},
+}: {
+  searchParams: SearchParamsProps;
+}) {
   if (Object.keys(searchParams).length === 0) {
     return redirect("/");
   }
   return (
-    <main className="max-w-6xl border border-red-500 mx-auto">
+    <main className="max-w-6xl  mx-auto">
       <div>
         <h1 className="font-semibold text-lg">
           Apartamentos{` ${searchParams?.city && `en ${searchParams.city}`}`}

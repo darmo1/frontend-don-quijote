@@ -1,0 +1,1 @@
+export { CardWhatsapp } from './card-whatsapp'

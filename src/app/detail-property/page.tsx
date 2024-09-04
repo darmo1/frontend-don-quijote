@@ -9,10 +9,10 @@ type SearchParamsProps = {
 };
 export default async function SearchResults(
   {
-    searchParams,
+    searchParams = {},
   }: {
     searchParams: SearchParamsProps;
-  } = { searchParams: {} }
+  }
 ) {
   if (Object.keys(searchParams).length === 0) {
     return redirect("/");

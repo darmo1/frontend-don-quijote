@@ -63,7 +63,7 @@ export function SignupForm() {
       reset();
       window.location.href = "/";
     }
-  }, [formState]);
+  }, [formState, reset]);
 
   const handleChange = (field: keyof RegisterSchema) => () => {
     clearErrors(field);

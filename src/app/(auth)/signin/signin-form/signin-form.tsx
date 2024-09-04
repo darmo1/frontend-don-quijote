@@ -55,7 +55,7 @@ export const SigninForm = () => {
     }
 
     if (formState?.status === "error") return reset();
-  }, [formState]);
+  }, [formState, reset]);
 
   const handleChange = (field: keyof SignInSchema) => () => {
     clearErrors(field);
