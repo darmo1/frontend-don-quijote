@@ -12,6 +12,8 @@ import { valuesHeaderProps } from "./header";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { v4 } from "uuid";
+import { DropdownMenu } from "../dropdown-menu";
+
 
 export const HeaderMobile = ({
   data,
@@ -89,6 +91,8 @@ export const HeaderMobile = ({
               </SheetDescription>
             </SheetHeader>
           )}
+
+          {isUserLogged && <DropdownMenu />}
         </SheetContent>
       </Sheet>
     </header>
