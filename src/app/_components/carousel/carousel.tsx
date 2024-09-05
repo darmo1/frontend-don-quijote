@@ -23,7 +23,7 @@ export function SimpleSlider() {
     },
   ];
   return (
-    <div className="slider-container pb-20 ">
+    <div className="slider-container pb-20 w-2/3 mx-auto md:w-full md:mx-0">
       <Slider {...settingsSlider}>
         {dataSlider.map(({ description, title }, index) => (
           <div

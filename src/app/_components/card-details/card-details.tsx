@@ -31,7 +31,7 @@ export const CardDetails = () => {
   ];
 
   return (
-    <section className="md:grid md:place-content-center md:my-14">
+    <section className="md:grid md:place-content-center md:my-14 px-4 md:px-0">
       <div className="md:grid md:place-content-center">
         <h1 className="font-semibold text-3xl  my-4 text-center md:text-5xl">
           Somos más que una inmobiliaria

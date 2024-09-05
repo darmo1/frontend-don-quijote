@@ -15,11 +15,8 @@ export const HouseCardServer = async (searchParams: SearchParamsProps) => {
     searchParams
   );
   if (error !== null) {
-    return (
-      <div className="text-center font-semibold">
-        Algo mal ocurrió, intente de nuevo más tarde 🚧🚧🚧
-      </div>
-    );
+    // Lanzar un error en lugar de devolver un componente
+    throw new Error('Failed to fetch result-properties');
   }
 
   return (

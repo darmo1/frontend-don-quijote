@@ -55,21 +55,6 @@ export const HeaderMobile = ({
           {data.length === 0 ? (
             <SheetHeader>
               <SheetTitle className="my-4 text-start">
-                Propiedades en:
-              </SheetTitle>
-              <SheetDescription>
-                <ul className="columns-1">
-                  {data.map(({ city, id }) => (
-                    <li key={id}>
-                      <li className="break-words my-2 text-start">{city}</li>
-                    </li>
-                  ))}
-                </ul>
-              </SheetDescription>
-            </SheetHeader>
-          ) : (
-            <SheetHeader>
-              <SheetTitle className="my-4 text-start">
                 Acerca de nosotros
               </SheetTitle>
               <SheetDescription>
@@ -77,6 +62,27 @@ export const HeaderMobile = ({
                   {secondMenu.map(({ item, href }) => (
                     <Link href={href} key={v4()}>
                       <li className="break-words my-2 text-start">{item}</li>
+                    </Link>
+                  ))}
+                </ul>
+              </SheetDescription>
+            </SheetHeader>
+          ) : (
+            <SheetHeader>
+              <SheetTitle className="my-4 text-start">
+                Propiedades en:
+              </SheetTitle>
+              <SheetDescription>
+                <ul className="columns-1">
+                  {data.map(({ city, id }) => (
+                    <Link
+                      href={`/result-properties/?city=${city.toLocaleLowerCase()}`}
+                      key={id}
+                      className="hover:underline"
+                    >
+                      <li key={id}>
+                        <li className="break-words my-2 text-start">{city}</li>
+                      </li>
                     </Link>
                   ))}
                 </ul>

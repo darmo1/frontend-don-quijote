@@ -88,9 +88,9 @@ export const Footer = () => {
     },
   ];
   return (
-    <footer className="mx-12 border-t-2 mt-auto">
+    <footer className="border-t-2 mt-auto">
       <div className="border-b-2 py-6">
-        <div className="">
+        <div className="mx-12">
           <Image
             src="/logo-donquijote.svg"
             width="170"
@@ -100,15 +100,15 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="flex md:justify-between my-8  flex-wrap">
+      <div className="flex flex-col md:flex-row md:justify-between my-8  flex-wrap mx-12">
         <ItemFooter title="Contácto" items={contacto} />
         <ItemFooter title="Sobre Nosotros" items={aboutUs} />
         <ItemFooter title="Propiedades" items={places} columns={3} />
         <ItemFooter title="Servicios" items={servicios} />
       </div>
-      <div className="bg-custom-orange h-16 block  md:flex md:justify-end  md:items-center">
+      <div className="bg-custom-orange block  md:flex md:justify-end  md:items-center py-2 md:mx-12 ">
         <Link href="">
-          <div className="flex mx-4">
+          <div className="flex my-2 md:my-0 mx-12 md:mx-0">
             <Image
               src="/logotipo-de-instagram.png"
               width={20}
@@ -119,7 +119,7 @@ export const Footer = () => {
           </div>
         </Link>
         <Link href="">
-          <div className="flex mx-4"> 
+          <div className="flex my-2 md:my-0 mx-12 md:mx-0"> 
             <Image
               src="/facebook.png"
               width={22}

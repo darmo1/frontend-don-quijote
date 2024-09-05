@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { SuggestionsProperty } from "./suggestionsProperty";
 import { ResponseGetAllData } from "@/app/all-properties/page";
 import { suggestedProperties } from "@/app/result-properties/utils";
+import { HouseCardSkeleton } from "@/app/_components/house-card/house-card.skeleton";
 
 type ResponseProps = {
   data: {
@@ -17,7 +18,7 @@ export const SuggestionPropertyServer = async ({ city }: { city: string }) => {
   if (!data?.suggestedProperties?.length || error) return;
 
   return (
-    <Suspense fallback={<div>Cargando...</div>}>
+    <Suspense fallback={<HouseCardSkeleton />}>
       <SuggestionsProperty suggestedProperties={data.suggestedProperties} />
     </Suspense>
   );

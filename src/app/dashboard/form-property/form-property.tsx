@@ -18,7 +18,7 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { useQuickToast } from "@/providers/toast-context";
 import { secureImage } from "./utils";
-import { dataInputPropertyForm } from "./data";
+import { dataInputPropertyForm, MAX_FILE_SIZE, MAX_IMAGES } from "./data";
 
 export const Formproperty = ({ departments }: FormPropertyProps) => {
   const [municipalities, setMunicipalities] = useState<MunicipalityProps[]>([]);
@@ -117,11 +117,39 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
   const handleAddImages = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
     const uploadedFiles = Array.from(event.target.files || []);
+
+    //validation size and number amount of images
+    const validFiles = uploadedFiles.filter( file => {
+      if( file.size > MAX_FILE_SIZE ){
+        toast?.error({
+          message: `El archivo ${file.name} excede el tamaño de 1MB` 
+        });
+        return false
+      }
+
+      if( fields.length + validFiles.length >= MAX_IMAGES){
+        toast?.error({
+          message: `No puede subir más de 10 imágenes`
+        });
+        return false
+      }
+
+      return true;
+    });
+
     const files = uploadedFiles.map((file: File) => ({
       id: uuid(),
       file,
     }));
-    append(files);
+
+    //add images no more than 10
+    if( fields.length + files.length <= MAX_IMAGES ){
+      append(files);
+    } else {
+      toast?.error({
+        message: `No puedes subir más de 10 imágenes en total`
+      })
+    }
 
     if (hiddenFileInput.current) {
       hiddenFileInput.current.value = "";
@@ -210,6 +238,7 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
             type="file"
             className={`border  px-4 py-2 rounded-xl hidden`}
             multiple
+            accept="image/png, image/jpeg"
             onChange={handleAddImages}
           />
         </div>
@@ -248,7 +277,7 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
         ))}
       </div>
 
-      {fields.length > 0 && fields.length <= 10 && (
+      {fields.length > 0 && fields.length <= MAX_IMAGES && (
         <div className="flex justify-center">
           <Button variant="destructive" onClick={onAddImage} className="my-4">
             Add documents

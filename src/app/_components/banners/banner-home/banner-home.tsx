@@ -41,7 +41,7 @@ export const BannerHome = () => {
       </div>
 
       <form
-        className="grid grid-cols-2 grid-rows-3 h-[180px]  md:flex md:flex-wrap md:gap-7 md:justify-center content-center"
+        className="grid grid-cols-2 grid-rows-3 h-[180px] px-7 md:px0 md:flex md:flex-wrap md:gap-7 md:justify-center content-center"
         onSubmit={handleSubmit(onSubmit)}
       >
         <input

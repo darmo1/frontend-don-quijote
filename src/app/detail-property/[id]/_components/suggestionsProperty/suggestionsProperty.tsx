@@ -22,7 +22,7 @@ export const SuggestionsProperty = async ({
   const settings = {
     ...settingsSlider,
     cssEase: "linear",
-    slidesToShow: 2,
+    slidesToShow: 1,
     centerPadding: "60px",
     className: "center",
   };

@@ -21,7 +21,7 @@ export const CardProperty = ({
   municipality,
 }: ResponseGetAllData) => {
   return (
-    <Card className="min-w-[380px] h-[390px] relative m-6">
+    <Card className="min-w-[320px] md:min-w-[380px] h-[390px] relative mx-auto my-6 md:my-0 md:m-6">
       <Image
         src={images[0] ? images[0] : "/banner-home.svg"}
         alt={type}

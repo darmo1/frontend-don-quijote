@@ -19,7 +19,7 @@ export const Header = async () => {
   const places = await res.json();
 
   return (
-    <Suspense fallback={<div>Cargando...</div>}>
+    <>
       <HeaderDesktop
         data={places}
         contact={apiWhatsapp}
@@ -30,6 +30,6 @@ export const Header = async () => {
         contact={apiWhatsapp}
         isUserLogged={data?.isUserLogged}
       />
-    </Suspense>
+    </>
   );
 };

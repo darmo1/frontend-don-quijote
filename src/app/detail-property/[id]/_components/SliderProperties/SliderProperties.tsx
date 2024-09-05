@@ -10,7 +10,7 @@ type SliderPropertiesProps = {
 export const SliderProperties = ({ images }: SliderPropertiesProps) => {
   const settings = {
     ...settingsSlider,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
   };
   return (

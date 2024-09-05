@@ -60,8 +60,8 @@ export const CardWhatsappForm = ({ callingCode }: CardWhatsappFormProps) => {
 
   return (
     <form onSubmit={handleSubmit(handleForm)}>
-      <div className="flex gap-4">
-        <div className="w-1/2">
+      <div className="block md:flex gap-4">
+        <div className="md:w-1/2">
           <label>Pais</label>
           <div className="flex items-center">
             <div className=" bg-gray-200 w-[40px] h-[30px]">
@@ -92,7 +92,7 @@ export const CardWhatsappForm = ({ callingCode }: CardWhatsappFormProps) => {
             <div className="text-red-500">{errors.countryId.message}</div>
           )}
         </div>
-        <div className="flex flex-col w-1/2">
+        <div className="flex flex-col md:w-1/2">
           <label>Número de celular</label>
           <input
             {...register("cellPhone", { required: true, valueAsNumber: true })}

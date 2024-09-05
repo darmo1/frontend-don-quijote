@@ -75,7 +75,7 @@ export const HeaderDesktop = ({
   };
 
   return (
-    <header className="hidden md:flex justify-between items-center mx-12 py-3">
+    <header className="hidden md:flex justify-between items-center px-12 py-3 sticky top-0 z-50 bg-white">
       <div>
         <Link href="/">
           <Image

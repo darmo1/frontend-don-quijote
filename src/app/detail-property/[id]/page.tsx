@@ -59,7 +59,7 @@ export default async function Page({
     value: string | number | null;
   }) => {
     return (
-      <div className="w-1/3 ">
+      <div className="md:w-1/3 ">
         <h2 className="text-md font-semibold mt-3  w-full">{title}:</h2>
         <p className="text-md font-light mb-3 w-full">{value}</p>
       </div>
@@ -67,14 +67,14 @@ export default async function Page({
   };
 
   return (
-    <main className="max-w-6xl mx-auto px-12">
+    <main className="max-w-6xl mx-auto px-12 my-12">
       <SliderProperties images={images} />
-      <div className="text-center font-semibold h-12 w-full bg-[#49A02F] rounded flex justify-center items-center text-white my-14">
+      <div className="text-center font-semibold h-12 w-full bg-[#568f45] rounded flex justify-center items-center my-14">
         Vida de lujo en un exclusivo sector
       </div>
       <div className="my-8">
-        <h1 className="font-semibold  text-xl mb-12">Caracteristicas</h1>
-        <div className="flex flex-wrap max-w-2xl mx-auto ">
+        <h1 className="font-semibold  text-xl md:mb-12">Caracteristicas</h1>
+        <div className="block md:flex md:flex-wrap max-w-2xl mx-auto ">
           <Field title="Precio" value={price} />
           <Field title="Área" value={area} />
           <Field title="Tipo de propiedad" value={type} />
@@ -88,16 +88,8 @@ export default async function Page({
           <Field title="Sala comedor" value={dinningroom} />
         </div>
       </div>
-
-
-
-       <div>
-        <CardWhatsapp />
-      </div> 
-
-      <SuggestionPropertyServer city={city}/>
-
-      
+      <CardWhatsapp />
+      <SuggestionPropertyServer city={city} />
     </main>
   );
 }

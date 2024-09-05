@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen`}>
+      <body className={`${inter.className} min-h-screen bg-[#fafafafd]`}>
         <QueryProvider>
           <ToastProvider>
             <Suspense fallback={<div>Cargando....</div>}>

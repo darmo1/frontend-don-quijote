@@ -18,7 +18,7 @@ export default async function SearchResults(
     return redirect("/");
   }
   return (
-    <main className="max-w-6xl border border-red-500 mx-auto">
+    <main className="max-w-6xl mx-auto">
       <div>
         <h1 className="font-semibold text-lg">
           Apartamentos{` ${searchParams?.city && `en ${searchParams.city}`}`}

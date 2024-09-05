@@ -42,3 +42,8 @@ export const dataInputPropertyForm: dataInputPropertyFormProps[] = [
   { label: "Garaje", key: "garage", name: "garage", type: "number" },
   { label: "Cocina", key: "kitchen", name: "kitchen", type: "number" },
 ];
+
+
+
+export const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1 MB
+export const MAX_IMAGES = 10;

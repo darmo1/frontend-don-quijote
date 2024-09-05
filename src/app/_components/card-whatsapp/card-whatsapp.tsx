@@ -12,7 +12,7 @@ export const CardWhatsapp = async () => {
 
   return (
     <Suspense fallback={<CardWhatsappSkeleton />}>
-      <div className="border rounded-xl p-[30px] w-[400px] mx-auto">
+      <div className="border border-gray-300 rounded-xl p-[30px] md:w-[400px] mx-auto">
         <div className="mb-8">
           <h2 className="text-xl font-semibold">¿Te contactámos?</h2>
           <p className="text-light">Te escribimos a tu whatsapp o e-mail</p>
