@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import Derecho from '../content/derecho.md'
 
 type ParamsProps = { params: { service: string } };
 export default function Service({ params }: ParamsProps) {
@@ -8,43 +9,49 @@ export default function Service({ params }: ParamsProps) {
 
   if (!pagesAvailable.includes(service)) throw new Error("page not found");
 
-  const selectImage = (params: string): string => {
+  const selectImage = (params: string): { image: string; name: string } => {
     switch (params) {
       case "derecho": {
-        return "/derecho-penal.svg";
+        return {
+          image: "/banner-derecho.jpg",
+          name: "Derecho penal y de tránsito ",
+        };
       }
 
       case "aseo": {
-        return "/aseo-propiedades.svg";
+        return { image: "/aseo-propiedades.svg", name: "Aseo de propiedades" };
       }
 
       case "viajes": {
-        return "/agencia-viaje.svg";
+        return { image: "/banner-viajes.jpg", name: "Ventas de seguros" };
       }
 
       case "seguros": {
-        return "/ventas-seguro.jpg";
+        return { image: "/banner-seguros.jpg", name: "Viajes Don Quijote" };
       }
 
       default: {
-        return "/";
+        return { image: "/", name: "" };
       }
     }
   };
 
   return (
     <>
-      <div className="w-screen md:h-[400px] relative">
+      <div className="w-screen h-[400px] md:h-[400px] relative">
         <Image
-          src={selectImage(service)}
+          className="relative"
+          src={selectImage(service)?.image}
           alt="banner-service"
           fill
-         
-          style={{ objectFit: "cover", objectPosition: "0% 75%" }}
+          style={{ objectFit: "cover" }}
         />
+        <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-semibold text-4xl text-white">
+          {selectImage(service)?.name?.toUpperCase()}
+        </h1>
       </div>
-      <main className="min-h-screen">
-        <h1 className="text-center font-semibold text-4xl my-5">{service.toUpperCase()}</h1>
+      <main className="min-h-screen max-w-6xl mx-auto my-12">
+        <Derecho />
       </main>
     </>
   );
