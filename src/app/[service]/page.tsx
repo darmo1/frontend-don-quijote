@@ -26,7 +26,7 @@ export default function Service({ params }: ParamsProps) {
 
       case "aseo": {
         return {
-          image: "/aseo-propiedades.svg",
+          image: "/banner-aseo.jpg",
           name: "Aseo de propiedades",
           component: Aseo,
         };
@@ -58,7 +58,7 @@ export default function Service({ params }: ParamsProps) {
 
   return (
     <>
-      <div className="w-screen h-[400px] md:h-[400px] relative">
+      <div className="w-screen h-[400px] md:h-[400px] relative p-4">
         <Image
           className="relative"
           src={image}
