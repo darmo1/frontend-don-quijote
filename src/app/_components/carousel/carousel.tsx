@@ -12,17 +12,17 @@ export function SimpleSlider() {
         "Ofrecemos gran variedad de propiedades en Medellín y sus alrededores",
     },
     {
-      title: "Inmobiliaria don quijote",
+      title: "Viajes Don Quijote",
       description:
-        "Ofrecemos gran variedad de propiedades en Medellín y sus alrededores",
+        "Tenemos buenas ofertas de viajes y días de sol para  ti y tu familia",
     },
     {
-      title: "Inmobiliaria don quijote",
+      title: "Abogados Don Quijote",
       description:
-        "Ofrecemos gran variedad de propiedades en Medellín y sus alrededores",
+        "Ofrecemos servicios en derecho penal, de transito e inmobiliario con los mejores profesionales",
     },
   ];
-  return (
+  return ( 
     <div className="slider-container pb-20 w-2/3 mx-auto md:w-full md:mx-0">
       <Slider {...settingsSlider}>
         {dataSlider.map(({ description, title }, index) => (

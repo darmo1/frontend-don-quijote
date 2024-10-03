@@ -22,7 +22,7 @@ export const ItemFooter = ({ items, title, columns }: ItemFooterProps) => {
         {items.map(({ id, link, value }) =>
           link ? (
             <Link href={link} key={id}>
-              <li className="my-3">{value}</li>
+              <li className="my-3 hover:underline">{value}</li>
             </Link>
           ) : (
             <li key={id} className="my-3">

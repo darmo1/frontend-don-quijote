@@ -4,7 +4,8 @@ import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import queryString from "query-string";
-// import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { v4 as uuid } from "uuid";
+
 export interface IFormInput {
   city: string;
   property: string;
@@ -31,13 +32,38 @@ export const BannerHome = () => {
   if (["/signin", "/signup"].includes(pathName)) return null;
   const cNameInput = `px-3 py-1 border md:rounded-xl md:w-[300px]  h-[50px]`;
 
+  const propiertyOptions = [
+    {
+      id: uuid(),
+      name: "Apartamento",
+    },
+    {
+      id: uuid(),
+      name: "Apartaestudio",
+    },
+    {
+      id: uuid(),
+      name: "Casa",
+    },
+    {
+      id: uuid(),
+      name: "Finca",
+    },
+    {
+      id: uuid(),
+      name: "Lote",
+    },
+  ];
+
   return (
     <section className="bg-banner-home bg-cover  h-[467px] grid place-content-center">
       <div className="flex flex-col justify-center items-center my-8">
         <h2 className="text-3xl md:text-5xl text-white">
           Compra tu propiedad con
         </h2>
-        <h1 className="text-3xl md:text-5xl text-white md:my-2">Grupo Don quijote</h1>
+        <h1 className="text-3xl md:text-5xl text-white md:my-2">
+          Grupo Don quijote
+        </h1>
       </div>
 
       <form
@@ -50,11 +76,17 @@ export const BannerHome = () => {
           placeholder={`Buscar por ciudad`}
         />
 
-        <input
-          {...register("property", { maxLength: 20 })}
-          className={`${cNameInput} col-span-1 row-span-1 rounded-bl-xl `}
-          placeholder="Tipo de propiedades"
-        />
+        <select
+          {...register("property", { required: true })}
+          className={`${cNameInput} col-span-1 row-span-1 rounded-bl-xl text-gray-700`}
+        >
+          <option value=""  disabled>Tipo de propiedad...</option>
+          {propiertyOptions.map(({ id, name }) => (
+            <option value={id} key={id}>
+              {name}
+            </option>
+          ))}
+        </select>
 
         <input
           type="number"
