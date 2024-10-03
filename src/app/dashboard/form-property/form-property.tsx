@@ -19,6 +19,7 @@ import Image from "next/image";
 import { useQuickToast } from "@/providers/toast-context";
 import { secureImage } from "./utils";
 import { dataInputPropertyForm, MAX_FILE_SIZE, MAX_IMAGES } from "./data";
+import { propiertyOptions } from "@/app/_components/banners/banner-home/banner-home";
 
 export const Formproperty = ({ departments }: FormPropertyProps) => {
   const [municipalities, setMunicipalities] = useState<MunicipalityProps[]>([]);
@@ -110,7 +111,8 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
     </div>
   );
 
-  const onAddImage = () => {
+  const onAddImage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
     hiddenFileInput.current && hiddenFileInput.current.click();
   };
 
@@ -119,36 +121,37 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
     const uploadedFiles = Array.from(event.target.files || []);
 
     //validation size and number amount of images
-    const validFiles = uploadedFiles.filter( file => {
-      if( file.size > MAX_FILE_SIZE ){
+    const validFiles = uploadedFiles.filter((file) => {
+      if (file.size > MAX_FILE_SIZE) {
         toast?.error({
-          message: `El archivo ${file.name} excede el tamaño de 1MB` 
+          message: `El archivo ${file.name} excede el tamaño de 1MB, cargue una imagen de menor peso`,
+          pauseOnHover: true
         });
-        return false
+        return false;
       }
 
-      if( fields.length + validFiles.length >= MAX_IMAGES){
+      if ((fields.length ) >= MAX_IMAGES) {
         toast?.error({
-          message: `No puede subir más de 10 imágenes`
+          message: `No puede subir más de 10 imágenes`,
         });
-        return false
+        return false;
       }
 
       return true;
     });
 
-    const files = uploadedFiles.map((file: File) => ({
+    const files = validFiles.map((file: File) => ({
       id: uuid(),
       file,
     }));
 
     //add images no more than 10
-    if( fields.length + files.length <= MAX_IMAGES ){
+    if ((fields.length + files.length) <= MAX_IMAGES) {
       append(files);
     } else {
       toast?.error({
-        message: `No puedes subir más de 10 imágenes en total`
-      })
+        message: `No puedes subir más de 10 imágenes en total`,
+      });
     }
 
     if (hiddenFileInput.current) {
@@ -216,6 +219,18 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
             ))}
           </select>
         </div>
+
+        <div className="flex flex-col mb-8 md:w-1/3">
+          <label className="font-semibold text-sm mb-2">Tipo de vivienda</label>
+          <select {...register("type")} className="border px-4 py-2 rounded-xl">
+            <option value="">Tipo de propiedad...</option>
+            {propiertyOptions.map(({ id, name }) => (
+              <option value={id} key={id}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </div>
         {dataInputPropertyForm.map(({ label, name, type, key }) => (
           <Input label={label} name={name} type={type} key={key} />
         ))}
@@ -228,7 +243,7 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
               className={`font-semibold text-sm mb-2 border w-full min-h-80 rounded-xl grid place-content-center my-4`}
               htmlFor={"images"}
             >
-              fotos
+              fotos <small>Solo se aceptan formato png,jpeg </small>
             </label>
           )}
           <input
@@ -238,10 +253,11 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
             type="file"
             className={`border  px-4 py-2 rounded-xl hidden`}
             multiple
-            accept="image/png, image/jpeg"
+            accept="image/png, image/jpeg, image/jpg"
             onChange={handleAddImages}
           />
         </div>
+        <small>Máximo de fotos: 10 </small>
       </div>
       <div className="flex flex-wrap gap-3 ">
         {fields.map(({ id, file }, index) => (
@@ -279,7 +295,7 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
 
       {fields.length > 0 && fields.length <= MAX_IMAGES && (
         <div className="flex justify-center">
-          <Button variant="destructive" onClick={onAddImage} className="my-4">
+          <Button variant="destructive" onClick={(e) => onAddImage(e)} className="my-4">
             Add documents
           </Button>
         </div>

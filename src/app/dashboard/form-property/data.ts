@@ -1,18 +1,7 @@
 import { dataInputPropertyFormProps } from "./types";
 
 export const dataInputPropertyForm: dataInputPropertyFormProps[] = [
-  {
-    label: "Tipo de vivienda",
-    key: "typeOfProperty",
-    name: "type",
-    type: "text",
-  },
-  // {
-  //   label: "Descripcion",
-  //   key: "description",
-  //   name: "description",
-  //   type: "text",
-  // },
+  
   { label: "Dirección", key: "address", name: "address", type: "text" },
   {
     label: "Sector o Barrio",
@@ -21,7 +10,7 @@ export const dataInputPropertyForm: dataInputPropertyFormProps[] = [
     type: "text",
   },
   { label: "Precio", key: "Precio", name: "price", type: "number" },
-  { label: "Área", key: "area", name: "area", type: "number" },
+  { label: "Área m3", key: "area", name: "area", type: "number" },
   { label: "Referencia", key: `reference`, name: "reference", type: "text" },
   { label: "Estrato", key: "estrato", name: "socialClass", type: "number" },
   {

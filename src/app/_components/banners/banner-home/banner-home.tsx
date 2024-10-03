@@ -12,6 +12,29 @@ export interface IFormInput {
   rooms: number;
 }
 
+export const propiertyOptions = [
+  {
+    id: uuid(),
+    name: "Apartamento",
+  },
+  {
+    id: uuid(),
+    name: "Apartaestudio",
+  },
+  {
+    id: uuid(),
+    name: "Casa",
+  },
+  {
+    id: uuid(),
+    name: "Finca",
+  },
+  {
+    id: uuid(),
+    name: "Lote",
+  },
+];
+
 export const BannerHome = () => {
   const pathName = usePathname();
   const { push } = useRouter();
@@ -31,29 +54,6 @@ export const BannerHome = () => {
 
   if (["/signin", "/signup"].includes(pathName)) return null;
   const cNameInput = `px-3 py-1 border md:rounded-xl md:w-[300px]  h-[50px]`;
-
-  const propiertyOptions = [
-    {
-      id: uuid(),
-      name: "Apartamento",
-    },
-    {
-      id: uuid(),
-      name: "Apartaestudio",
-    },
-    {
-      id: uuid(),
-      name: "Casa",
-    },
-    {
-      id: uuid(),
-      name: "Finca",
-    },
-    {
-      id: uuid(),
-      name: "Lote",
-    },
-  ];
 
   return (
     <section className="bg-banner-home bg-cover  h-[467px] grid place-content-center">

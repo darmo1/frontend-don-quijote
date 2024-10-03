@@ -19,6 +19,8 @@ export const SuggestionsProperty = async ({
     (item) => item.id !== id
   );
 
+  if( !propertiesSuggested?.length ) return 
+
   const settings = {
     ...settingsSlider,
     cssEase: "linear",
