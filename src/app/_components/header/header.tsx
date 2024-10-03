@@ -1,7 +1,7 @@
-import { endpointApiNext } from "@/app/constant/endpoint";
 import { HeaderDesktop } from "./header.desktop";
 import { HeaderMobile } from "./header.mobile";
 import { headers } from "next/headers";
+import getCities  from "@/app/services/home/getCities";
 import { Suspense } from "react";
 
 export type valuesHeaderProps = {
@@ -15,11 +15,12 @@ export const Header = async () => {
   const data = userDataHeader ? JSON.parse(userDataHeader) : {};
   const apiWhatsapp = "https://api.whatsapp.com/send?phone=573007064360";
 
-  const res = await fetch(endpointApiNext.getCities);
-  const places = await res.json();
+  // const res = await fetch(endpointApiNext.getCities);
+  // const places = await res.json();
+  const places = await getCities()
 
   return (
-    <>
+    <Suspense fallback={<div>Cargando...</div>}>
       <HeaderDesktop
         data={places}
         contact={apiWhatsapp}
@@ -30,6 +31,6 @@ export const Header = async () => {
         contact={apiWhatsapp}
         isUserLogged={data?.isUserLogged}
       />
-    </>
+    </ Suspense>
   );
 };

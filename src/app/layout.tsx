@@ -6,7 +6,6 @@ import { Footer } from "./_components/footer";
 import { ToastProvider } from "@/providers/toast-context";
 import "react-toastify/dist/ReactToastify.css";
 import { QueryProvider } from "@/providers/query-provider.context";
-import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,13 +24,9 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-screen bg-[#fafafafd]`}>
         <QueryProvider>
           <ToastProvider>
-            <Suspense fallback={<div>Cargando...</div>}>
-              <Header />
-            </Suspense>
+            <Header />
             {children}
-            <Suspense fallback={<div>Cargando...</div>}>
-              <Footer />
-            </Suspense>
+            <Footer />
           </ToastProvider>
         </QueryProvider>
       </body>
