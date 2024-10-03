@@ -6,7 +6,7 @@ import type { NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   try{
   //1. Check if routes is protected
-  const protectedRoutes = ["/"];
+  const protectedRoutes = ["/", "/dashboard"];
   const currentPath = request.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(currentPath);
 
