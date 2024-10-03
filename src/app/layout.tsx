@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-screen bg-[#fafafafd]`}>
         <QueryProvider>
           <ToastProvider>
-            <Suspense fallback={<div>Cargando....</div>}>
+            <Suspense fallback={<div>Cargando...</div>}>
               <Header />
             </Suspense>
             {children}
