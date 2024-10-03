@@ -78,7 +78,7 @@ export const BannerHome = () => {
 
         <select
           {...register("property")}
-          className={`${cNameInput} col-span-1 row-span-1 rounded-bl-xl opacity-50`}
+          className={`${cNameInput} col-span-1 row-span-1 rounded-bl-xl `}
         >
           <option value="">Tipo de propiedad...</option>
           {propiertyOptions.map(({ id, name }) => (
