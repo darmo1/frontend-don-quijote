@@ -77,10 +77,10 @@ export const BannerHome = () => {
         />
 
         <select
-          {...register("property", { required: true })}
+          {...register("property", { required: false })}
           className={`${cNameInput} col-span-1 row-span-1 rounded-bl-xl text-gray-700`}
         >
-          <option value=""  disabled>Tipo de propiedad...</option>
+          <option value=""  disabled selected>Tipo de propiedad...</option>
           {propiertyOptions.map(({ id, name }) => (
             <option value={id} key={id}>
               {name}
