@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { endpoint } from "@/app/constant/endpoint";
 import { z } from "zod";
 import { FormInputProps } from "@/app/dashboard/form-property/types";
+import { revalidatePath } from "next/cache";
 
 const message = "Field should be greater";
 const messageString = "There is somethin wrong";
@@ -73,6 +74,7 @@ export async function propertyAction(
     });
 
     const data = await response.json();
+    revalidatePath('/')
 
     return {
       status: "success",
