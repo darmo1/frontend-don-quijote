@@ -82,7 +82,7 @@ export const BannerHome = () => {
         >
           <option value="">Tipo de propiedad...</option>
           {propiertyOptions.map(({ id, name }) => (
-            <option value={id} key={id}>
+            <option value={name} key={id}>
               {name}
             </option>
           ))}
