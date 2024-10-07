@@ -12,8 +12,8 @@ export const HouseCardClient = ({
   return (
     <div className="flex items-center w-full mb-12">
       {data?.length === 0 ? (
-        <div className="text-center font-semibold">
-          No se encontraron resultados, intento con otra busqueda 💥
+        <div className="text-center font-semibold text-xl my-12 mx-6">
+          No se encontraron resultados, intento con otra búsqueda 💥
         </div>
       ) : (
         Array.isArray(data) && (

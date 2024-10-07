@@ -9,9 +9,9 @@ export const AllPropertiesClient = ({
   properties: ResponseGetAllData[];
 }) => {
   return (
-    <div className="flex items-center w-full mb-12">
+    <div className="flex items-center justify-center w-full my-12">
       {properties?.length === 0 ? (
-        <div className="text-center font-semibold">
+        <div className="text-center font-semibold ">
           No se encontraron resultados, intento con otra busqueda 💥
         </div>
       ) : (

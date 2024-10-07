@@ -19,7 +19,17 @@ export default async function SearchResults({
     <main className="max-w-6xl md:px-8 mx-auto my-12">
       <div>
         <h1 className="font-semibold text-2xl md:text-3xl mx-6">
-          <span className="capitalize">{searchParams?.property}:</span>{`${searchParams?.city && `en ${searchParams.city}`}`}
+          <span className="capitalize">{searchParams?.property}</span>
+          {` ${searchParams?.city && `en ${searchParams.city}`}`}{" "}
+          {`${
+            searchParams?.rooms &&
+            `con ${
+              searchParams.rooms == 1
+                ? `${searchParams.rooms} habitacion`
+                : `${searchParams.rooms} habitaciones`
+            }`
+          }`}
+          :
         </h1>
       </div>
       <HouseCardServer {...searchParams} />

@@ -38,7 +38,7 @@ export const propiertyOptions = [
 export const BannerHome = () => {
   const pathName = usePathname();
   const { push } = useRouter();
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const { city, property, rooms } = data;
     const cityformatted = city.trim().toLowerCase();
@@ -54,7 +54,7 @@ export const BannerHome = () => {
 
   if (["/signin", "/signup"].includes(pathName)) return null;
   const cNameInput = `px-3 py-1 border md:rounded-xl md:w-[300px]  h-[50px]`;
-
+console.log( { errors }, '#error ')
   return (
     <section className="bg-banner-home bg-cover  h-[467px] grid place-content-center">
       <div className="flex flex-col justify-center items-center my-8">
@@ -90,7 +90,10 @@ export const BannerHome = () => {
 
         <input
           type="number"
-          {...register("rooms", { min: 1 })}
+          {...register("rooms", {
+            valueAsNumber: true,
+            validate: (value) => value > 0,
+          })}
           className={`${cNameInput} col-span-1 row-span-1 rounded-br-xl  `}
           placeholder="Habitaciones "
         />
