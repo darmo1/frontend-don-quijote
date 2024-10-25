@@ -4,3 +4,5 @@ export function replaceTokens(url: string, ...params: string[]): string {
     return acc.replace(token, param.toString());
   }, url);
 }
+
+

@@ -225,7 +225,7 @@ export const Formproperty = ({ departments }: FormPropertyProps) => {
           <select {...register("type")} className="border px-4 py-2 rounded-xl">
             <option value="">Tipo de propiedad...</option>
             {propiertyOptions.map(({ id, name }) => (
-              <option value={id} key={id}>
+              <option value={name} key={id}>
                 {name}
               </option>
             ))}

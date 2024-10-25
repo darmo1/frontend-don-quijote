@@ -17,7 +17,7 @@ export const HouseCardServer = async (searchParams: SearchParamsProps) => {
       rooms: searchParams.rooms && Number(searchParams.rooms)
     }
   });
-  console.log({ data }, '#data')
+
   if (error !== null) {
     // Lanzar un error en lugar de devolver un componente
     throw new Error('Failed to fetch result-properties');

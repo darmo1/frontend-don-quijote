@@ -87,6 +87,9 @@ export default async function Page({
           <Field title="Administración" value={administration} />
           <Field title="Sala comedor" value={dinningroom} />
         </div>
+        <div className="my-4">
+          <Field title="Descripción" value={description} />
+        </div>
       </div>
       <CardWhatsapp />
       <SuggestionPropertyServer city={city} />

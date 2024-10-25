@@ -15,10 +15,10 @@ export const CardProperty = ({
   id,
   images,
   type,
-  description,
   price,
   area,
   municipality,
+  location,
 }: ResponseGetAllData) => {
   return (
     <Card className="min-w-[320px] md:min-w-[380px] h-[390px] relative mx-auto my-6 md:my-0 md:m-6">
@@ -28,10 +28,11 @@ export const CardProperty = ({
         layout="fill"
         objectFit="cover"
         loading="lazy"
+        className="mask-custom-gradient"
       />
       <CardHeader className="absolute top-0">
-        <CardTitle>{description}</CardTitle>
-        <CardDescription>{type}</CardDescription>
+        <CardTitle>{location}</CardTitle>
+        <CardDescription>{municipality}</CardDescription>
       </CardHeader>
       <CardFooter className="border rounded-xl absolute -bottom-6  right-14  w-3/4 flex items-center p-0 bg-white px-1 py-2">
         <div className="rounded-xl flex w-full items-center px-1">
@@ -42,7 +43,7 @@ export const CardProperty = ({
           <div className="flex flex-col justify-between items-center min-w-1/3">
             <h3 className="font-semibold text-sm">Área:</h3>
             <p className="text-sm">
-              {area} <small>m3</small>
+              {area} <small>m2</small>
             </p>
           </div>
           <Button asChild variant={"destructive"} className="mr-0 ml-auto">

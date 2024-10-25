@@ -20,15 +20,17 @@ export default async function SearchResults({
       <div>
         <h1 className="font-semibold text-2xl md:text-3xl mx-6">
           <span className="capitalize">{searchParams?.property}</span>
-          {` ${searchParams?.city && `en ${searchParams.city}`}`}{" "}
-          {`${
-            searchParams?.rooms &&
-            `con ${
+          {searchParams?.city ? `En ${searchParams.city}` : null}
+          {
+            searchParams?.rooms 
+            ? ` con ${
               searchParams.rooms == 1
                 ? `${searchParams.rooms} habitacion`
                 : `${searchParams.rooms} habitaciones`
             }`
-          }`}
+            : null
+          }
+          {' '}
           :
         </h1>
       </div>

@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -52,7 +52,7 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        'custom-orange': '#FFD79B'
+        "custom-orange": "#FFD79B",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -74,11 +74,25 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       backgroundImage: {
-        'banner-home': "url('/banner-home.jpg')"
-      }
+        "banner-home": "url('/banner-home.jpg')",
+      },
+      maskImage: {
+        "custom-gradient":
+          "linear-gradient(to top, #000, transparent 95%)",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate"), require('@tailwindcss/typography')],
-} satisfies Config
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    function ({ addUtilities }: any) {
+      addUtilities({
+        ".mask-custom-gradient": {
+          maskImage: "linear-gradient(to top, #000, transparent 95%)",
+        },
+      });
+    },
+  ],
+} satisfies Config;
 
-export default config
+export default config;

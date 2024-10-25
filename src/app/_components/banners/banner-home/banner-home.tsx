@@ -5,11 +5,12 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import queryString from "query-string";
 import { v4 as uuid } from "uuid";
+import { useQuickToast } from "@/providers/toast-context";
 
 export interface IFormInput {
   city: string;
   property: string;
-  rooms: number;
+  rooms: number | null;
 }
 
 export const propiertyOptions = [
@@ -38,23 +39,43 @@ export const propiertyOptions = [
 export const BannerHome = () => {
   const pathName = usePathname();
   const { push } = useRouter();
-  const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
+  const toast = useQuickToast();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>({
+    defaultValues: {
+      city: "",
+      property: "",
+      rooms: null,
+    },
+  });
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const { city, property, rooms } = data;
     const cityformatted = city.trim().toLowerCase();
     const propertyFormatted = property.trim().toLowerCase();
 
     const queryParams = queryString.stringify({
-      city: cityformatted,
-      property: propertyFormatted,
-      rooms,
+      ...(cityformatted && { city: cityformatted }),
+      ...(propertyFormatted && { property: propertyFormatted }),
+      ...(rooms && { rooms }),
     });
+    if(!queryParams){
+      toast?.error({
+        message: "Ingresa los campos para la busqueda",
+        pauseOnHover: true
+      });
+      return
+    }
+
+
     push(`/result-properties/?${queryParams}`);
   };
 
   if (["/signin", "/signup"].includes(pathName)) return null;
   const cNameInput = `px-3 py-1 border md:rounded-xl md:w-[300px]  h-[50px]`;
-console.log( { errors }, '#error ')
+ 
   return (
     <section className="bg-banner-home bg-cover  h-[467px] grid place-content-center">
       <div className="flex flex-col justify-center items-center my-8">
@@ -90,9 +111,9 @@ console.log( { errors }, '#error ')
 
         <input
           type="number"
+          min={0}
           {...register("rooms", {
             valueAsNumber: true,
-            validate: (value) => value > 0,
           })}
           className={`${cNameInput} col-span-1 row-span-1 rounded-br-xl  `}
           placeholder="Habitaciones "

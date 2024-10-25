@@ -9,6 +9,7 @@ export const HouseCardClient = ({
 }: {
   data: ResponseGetAllData[];
 }) => {
+
   return (
     <div className="flex items-center w-full mb-12">
       {data?.length === 0 ? (
